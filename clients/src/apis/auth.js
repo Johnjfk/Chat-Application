@@ -67,3 +67,18 @@ export const checkValid = async () => {
     window.location.href = '/chats';
   }
 };
+export const uploadProfilePicture = async (formData) => {
+  try {
+    const token = localStorage.getItem('userToken');
+    const response = await axios.post(`${url}/api/upload/upload-profile-pic`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error uploading profile picture:', error);
+    throw error;
+  }
+};
